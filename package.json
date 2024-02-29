@@ -39,6 +39,8 @@
   ],
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@playwright/test": "^1.42.0",
+    "@types/node": "^20.11.24",
     "sass": "^1.70.0"
   }
 }
