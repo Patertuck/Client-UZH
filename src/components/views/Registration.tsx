@@ -33,21 +33,17 @@ FormField.propTypes = {
   onChange: PropTypes.func,
 };
 
-const Login = () => {
+const Registration = () => {
   const navigate = useNavigate();
   const [password, setPassword] = useState<string>(null);
   const [username, setUsername] = useState<string>(null);
 
-  const swapToRegistration = () => {
-    navigate("/registration")
-  }
-
-  const doLogin = async () => {
-    console.log("Try Login")
+  const doRegistration = async () => {
+    console.log("Try Registration")
     try {
       const requestBody = JSON.stringify({ username, password });
       console.log("Posting to Server", requestBody)
-      const response = await api.post("/usersLogin", requestBody);
+      const response = await api.post("/users", requestBody);
       console.log("Succesfully received from Server", response)
 
       // Get the returned user and update a new object.
@@ -55,17 +51,15 @@ const Login = () => {
       console.log("Created use Object", user)
 
       // Store the token into the local storage.
-      if (user.token){
-        localStorage.setItem("token", user.token);
-        console.log("Set to Local storage with user token", user.token)
+      localStorage.setItem("token", user.token);
+      console.log("Set to Local storage with user token", user.token)
 
-        // Login successfully worked --> navigate to the route /game in the GameRouter
-        navigate("/game");
-      }
+      // Login successfully worked --> navigate to the route /game in the GameRouter
+      navigate("/game");
     } catch (error) {
-      console.log("Eroor occured while logging user into Server")
+      console.log("Eroor occured while registrating user into Server")
       alert(
-        `Login is incorrect`
+        `User already exists`
       );
     }
   };
@@ -88,18 +82,11 @@ const Login = () => {
             <Button
               disabled={!username || !password}
               width="100%"
-              onClick={() => doLogin()}
+              onClick={() => doRegistration()}
             >
-              Login
+              Register
             </Button>
-          </div>
-          <div className="Registration button-container">
-            <Button
-              width="100%"
-              onClick={() => swapToRegistration()}
-            >
-              Need an account?
-            </Button>
+
           </div>
         </div>
       </div>
@@ -110,4 +97,4 @@ const Login = () => {
 /**
  * You can get access to the history object's properties via the useLocation, useNavigate, useParams, ... hooks.
  */
-export default Login;
+export default Registration;
