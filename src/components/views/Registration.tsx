@@ -35,8 +35,8 @@ FormField.propTypes = {
 
 const Registration = () => {
   const navigate = useNavigate();
-  const [password, setPassword] = useState<string>(null);
-  const [username, setUsername] = useState<string>(null);
+  const [password, setPassword] = useState<string>(undefined);
+  const [username, setUsername] = useState<string>(undefined);
 
   const doRegistration = async () => {
     console.log("Try Registration")
@@ -54,7 +54,7 @@ const Registration = () => {
       localStorage.setItem("token", user.token);
       console.log("Set to Local storage with user token", user.token)
 
-      // Login successfully worked --> navigate to the route /game in the GameRouter
+      // Login successfully worked --> navigate to the route /game in the AppRouter
       navigate("/game");
     } catch (error) {
       console.log("Eroor occured while registrating user into Server")

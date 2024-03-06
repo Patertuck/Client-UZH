@@ -21,7 +21,7 @@ Player.propTypes = {
   user: PropTypes.object,
 };
 
-const Game = () => {
+const UserInformation = () => {
   // use react-router-dom's hook to access navigation, more info: https://reactrouter.com/en/main/hooks/use-navigate 
   const navigate = useNavigate();
   // define a state variable (using the state hook).
@@ -30,7 +30,6 @@ const Game = () => {
   // a component can have as many state variables as you like.
   // more information can be found under https://react.dev/learn/state-a-components-memory and https://react.dev/reference/react/useState 
   const [users, setUsers] = useState<User[]>(null);
-  const [currentUsername, setCurrentUsername] = useState<User[]>(null);
 
   const logout = (): void => {
     localStorage.removeItem("token");
@@ -45,7 +44,6 @@ const Game = () => {
     // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
     async function fetchData() {
       try {
-        setCurrentUsername(await fetchUserByToken(localStorage.getItem("token")));
         const response = await api.get("/users");
 
         // delays continuous execution of an async operation for 1 second.
@@ -83,33 +81,18 @@ const Game = () => {
 
   let content = <Spinner />;
 
-  if (users) {
-    content = (
-      <div className="game">
-        <ul className="game user-list">
-          {users.map((user: User) => (
-            <li key={user.id} onClick={() => navigate(`/game/userInformation/${user.id}`)}>
-              <Player user={user} />
-            </li>
-          ))}
-        </ul>
-        <Button width="100%" onClick={() => logout()}>
-          Logout
-        </Button>
-      </div>
-    );
-  }
+  
 
-  return (    
-  <div style={{display: "flex", flexDirection: "column"}}>
-    <BaseContainer className="game container">
-      <h2>Welcome {currentUsername}</h2>
-      <p className="game paragraph">
-        Get all users from secure endpoint:
-      </p>
-      {content}
-    </BaseContainer>
-  </div>
+  return (
+    <div style={{display: "flex", flexDirection: "column"}}>
+      <BaseContainer className="game container">
+        <h2>Current user</h2>
+        <p className="game paragraph">
+          Get all users from secure endpoint:
+        </p>
+        {content}
+      </BaseContainer>
+    </div>
   );
 };
 
@@ -120,11 +103,11 @@ const fetchUserByToken = async (token) => {
     console.log("Succesfully received from Server", response)
     console.log("Succesfully received from Server", user.username)
     console.log("Got it")
-    return user.username
 }
 
 const usernameForTitle = () => {
+  console.log()
   return fetchUserByToken(localStorage.getItem("token"))
 }
 
-export default Game;
+export default UserInformation;
