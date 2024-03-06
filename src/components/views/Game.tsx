@@ -123,8 +123,4 @@ const fetchUserByToken = async (token) => {
     return user.username
 }
 
-const usernameForTitle = () => {
-  return fetchUserByToken(localStorage.getItem("token"))
-}
-
 export default Game;
