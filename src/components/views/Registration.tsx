@@ -86,7 +86,11 @@ const Registration = () => {
             >
               Register
             </Button>
-
+            </div>
+            <div>
+            <Button width="100%" onClick={() => navigate("/login")}>
+              Back to Login
+            </Button>
           </div>
         </div>
       </div>
