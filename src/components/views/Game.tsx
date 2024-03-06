@@ -34,6 +34,7 @@ const Game = () => {
 
   const logout = (): void => {
     localStorage.removeItem("token");
+    api.post("/setUserOffline", currentUsername);
     navigate("/login");
   };
 
