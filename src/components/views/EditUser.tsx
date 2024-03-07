@@ -101,22 +101,25 @@ const EditUser = () => {
   const doSave = async () => {
     console.log("Try Saving")
     try {
+      if (inputBirthDate){
+      const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+        if (!dateRegex.test(inputBirthDate)) {
+        console.log("Wrong format of date");
+        alert("Wrong format of date");
+        return;}
+      }
+
       const requestBody = JSON.stringify({ inputUsername, inputBirthDate, currentUsername});
       console.log("Posting to Save to Server", requestBody)
-      const response = await api.put("/users", requestBody);
-      console.log("Succesfully received from Server", response)
-
-      // Get the returned user and update a new object.
-      const user = new User(response.data);
-      console.log("Created use Object", user)
-      setCurrentUserInformation(new User(response.data))
+      await api.put("/users", requestBody);
+      console.log("Succesfully received from Server")
 
       // Login successfully worked --> navigate to the route /game in the AppRouter
       navigate(`/game/userInformation/${id}`)
     } catch (error) {
-      console.log("Eroor occured while registrating user into Server")
+      console.log("Wrong format of input")
       alert(
-        `User already exists`
+        `Wrong format of input`
       );
     }
   };
@@ -137,7 +140,7 @@ const EditUser = () => {
             onChange={(un: string) => setInputUsername(un)}
           />
           <FormField
-            label="enter new birth date"
+            label="enter new birth date (format: yyy-mm-dd)"
             value={inputBirthDate}
             onChange={(n) => setInputBirthDate(n)}
           />

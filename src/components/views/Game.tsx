@@ -32,9 +32,10 @@ const Game = () => {
   const [users, setUsers] = useState<User[]>(null);
   const [currentUsername, setCurrentUsername] = useState<User[]>(null);
 
-  const logout = (): void => {
-    localStorage.removeItem("token");
+  const logout =  (): void => {
+    console.log(currentUsername);
     api.post("/setUserOffline", currentUsername);
+    localStorage.removeItem("token");
     navigate("/login");
   };
 
