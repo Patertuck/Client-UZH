@@ -111,7 +111,7 @@ const EditUser = () => {
 
       const requestBody = JSON.stringify({ inputUsername, inputBirthDate, currentUsername});
       console.log("Posting to Save to Server", requestBody)
-      await api.put("/users", requestBody);
+      await api.put(`/users/${id}`, requestBody);
       console.log("Succesfully received from Server")
 
       // Login successfully worked --> navigate to the route /game in the AppRouter
