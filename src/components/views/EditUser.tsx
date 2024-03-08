@@ -140,7 +140,7 @@ const EditUser = () => {
             onChange={(un: string) => setInputUsername(un)}
           />
           <FormField
-            label="enter new birth date (format: yyy-mm-dd)"
+            label="enter new birth date (format: yyyy-mm-dd)"
             value={inputBirthDate}
             onChange={(n) => setInputBirthDate(n)}
           />

@@ -115,7 +115,7 @@ const Game = () => {
   );
 };
 
-const fetchUserByToken = async (token) => {
+export const fetchUserByToken = async (token) => {
     console.log("Posting token to Server:", token)
     const response = await api.post("/fetchByToken", token);
     const user = new User(response.data);

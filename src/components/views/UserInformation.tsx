@@ -103,7 +103,7 @@ const UserInformation = () => {
   
   if (currentUserInformationUsername === currentUsername){
     editbutton = (
-      <Button width="100%" onClick={() => navigate(`/game/editUser`)}>
+      <Button width="100%" onClick={() => navigate(`/game/userInformation/editUser/${id}`)}>
         Edit Profile
       </Button>
     )
